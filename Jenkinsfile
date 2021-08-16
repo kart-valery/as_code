@@ -7,7 +7,7 @@ pipeline {
         stage('Clone') {
             steps {
                git url: 'https://github.com/kart-valery/as_code.git',
-               credentialsId: "git_hub_kart_ascode"
+               credentialsId: "7d6b6977-a318-4794-9243-938ee1aeb27d"
             }
         }
             stage('Test') {
