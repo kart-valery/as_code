@@ -1,8 +1,6 @@
 pipeline {
     agent {
-        node {
-            label "!master"
-        }
+        !master
     }
     triggers { 
         cron('H 2 * * 7')
