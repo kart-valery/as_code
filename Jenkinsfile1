@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+       stages {
+        stage('Clone') {
+            steps {
+               git url: 'https://github.com/kart-valery/as_code.git',
+               credentialsId: "all"
+            }
+        }
+            stage('Test') {
+            steps {
+                sh """
+                ls -la
+                """
+            }
+        }
+        stage('Push') {
+            steps {
+                sh """
+                touch speed.txt
+                git add speed.txt
+                git config --global user.email "ascode@test.ru"
+                git config --global user.name "As Code"
+                git commit -m "Speed_test_as_code"
+                git push git@github.com:kart-valery/as_code.git
+                """
+                
+            }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'speed.txt', onlyIfSuccessful: true
+            deleteDir()
+        }
+    }
+}
